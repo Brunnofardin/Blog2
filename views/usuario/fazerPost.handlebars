@@ -1,0 +1,29 @@
+<h2>Nova postagem</h2>
+<section class="card">
+
+    <form action="/usuario/fazerpostagem/nova" method="post" class="card-body">
+
+        <p>
+            Titulo:
+            <input type="text" name="titulo" id="titulo" required placeholder="ex: Meu 1° Projeto em Java" class="form-control">
+        </p>
+        <p>
+             Categoria
+            <input type="text" name="categoria" id="categoria" required placeholder="ex: Programação" class="form-control">
+        </p>
+        <p>
+             Link
+            <input type="text" name="link" id="link" required placeholder="ex: www/meuprojeto/redeSocial.com.br"class="form-control">
+        </p>
+        <p>
+            Descrição
+            <textarea name="descricao" id="descricao" cols="30" rows="10" required placeholder="ex: Meu site feito em html e css"  class="form-control"></textarea>
+        </p>
+        <p>
+            <input type="submit" value="Fazer Postagem" class="btn btn-success">
+            <input type="reset" value="Limpar Formulário" class="btn btn-danger">
+        </p>
+
+    </form>
+
+</section>

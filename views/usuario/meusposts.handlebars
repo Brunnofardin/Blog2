@@ -1,0 +1,42 @@
+<h2>Suas Postagens</h2>
+{{#if msg0}}
+    <div class="alert alert-success">
+        Postagem editada com sucesso!
+    </div>
+{{/if}}
+
+{{#if msg1}}
+    <div class="alert alert-danger">
+        Postagem deletada com sucesso!
+    </div>
+{{/if}}
+{{#if msg3}}
+    <div class="alert alert-danger">
+        Não há nehuma postagem neste momento!
+    </div>
+{{/if}}
+
+{{#each aqv}}
+
+    <div class="card mt-2">
+
+        <div class="card-body">
+
+            <p>{{Titulo}}</p>
+            <p>Categoria: {{Categoria}}</p>
+            <p>Descrição: {{Descricao}}</p>
+
+            <p>
+                <a href="/usuario/editarpost/{{_id}}" class="btn btn-success">Editar</a>
+                <a href="/usuario/deletarpost/{{_id}}" class="btn btn-danger">Deletar</a>
+            </p>
+
+        </div>
+
+    </div>
+
+{{else}}
+    <div class="alert alert-danger">
+        Você não possui postagens no momento!
+    </div>
+{{/each}}

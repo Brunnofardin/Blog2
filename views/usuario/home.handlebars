@@ -1,0 +1,42 @@
+
+<h1>Home</h1>
+
+{{#if success}}
+    <div class="p-3 text-primary-emphasis bg-success-subtle border border-primary-subtle rounded-3">
+
+        Registrado com Sucesso!
+
+    </div>
+{{/if}}
+
+{{#if msg}}
+  <div class="p-3 text-primary-emphasis bg-success-subtle border border-primary-subtle rounded-3">
+
+        Logado com sucesso!
+  </div>
+{{/if}}
+
+{{#if erro3}}
+    <div class="alert alert-danger">
+
+        Você já está logado!
+
+    </div>
+{{/if}}
+
+<div class="card text-center mt-4">
+  <div class="card-header">
+    Bem-Vindo
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Blog</h5>
+    <p class="card-text">Criado por Brunno Fardin de Souza</p>
+    <a href="/usuario/registro" class="btn btn-primary">Registro</a>
+  </div>
+  <div class="card-footer text-body-secondary">
+  </div>
+
+</div>
+
+
+

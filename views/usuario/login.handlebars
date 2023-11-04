@@ -1,0 +1,42 @@
+<h2 class="mt-2">Login</h2>
+
+{{#if erro1}}
+
+    <div class="alert alert-danger">
+        Senha icorreta!
+    </div>
+
+{{/if}}
+
+{{#if erro2}}
+
+     <div class="alert alert-danger">
+        Você já está logado!
+    </div>
+
+{{/if}}
+
+<div class="card mt-2">
+
+    <div class="card-body">
+
+        <form action="/usuario/login/logado" method="post">
+
+            <p>
+                Email
+                <input type="email" name="email" id="email" class="form-control" required>
+            </p>
+            <p>
+                Senha:
+                <input type="password" name="senha" id="senha" class="form-control" minlength="5" required>
+            </p>
+            <p>
+                <input type="submit" value="Login" class="btn btn-success">
+                <input type="reset" value="Limpar formulário" class="btn btn-danger">
+            </p>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,50 @@
+<h2 class="mt-2">Registro</h2>
+
+{{#if erro1}}
+
+    <div class="alert alert-danger">
+
+        Já existe um usuário registrado neste email!
+
+    </div>
+
+{{/if}}
+{{#if erro2}}
+
+    <div class="alert alert-danger">
+
+        Você não possui registro
+
+    </div>
+
+{{/if}}
+<div class="card mt-2">
+
+    <div class="card-body">
+
+        <form action="/usuario/registro/registrando" method="post" autocomplete="on">
+
+            <p>
+                 Email:
+                <input type="email" name="email" id="" required class="form-control">
+
+            </p>
+            <p>
+                Senha:
+                <input type="password" name="senha" id="" required minlength="5" class="form-control">
+            </p>
+            <p>
+                <input type="submit" value="Registrar" class="btn btn-success">
+                <input type="reset" value="Limpar Form" class="btn btn-danger">
+            </p>
+            <p>
+                <a href="/usuario/login">
+                    <input type="button" value="Possui registro? Clique aqui" class="btn btn-success">
+                </a>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>

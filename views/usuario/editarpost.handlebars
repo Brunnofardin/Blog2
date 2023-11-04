@@ -1,0 +1,31 @@
+{{#if aqv}}
+    <div>
+        <div>
+            <form action="/usuario/editarpost/salvando" method="post">
+                <p style="display: none;">
+                    <input type="text" name="id" id="" value="{{aqv._id}}">
+                </p>
+                <p>
+                    Titulo:
+                    <input type="text" name="titulo" id="" value="{{aqv.Titulo}}" class="form-control">
+                </p>
+                <p>
+                    Categoria:
+                    <input type="text" name="categoria" id="" value="{{aqv.Categoria}}" class="form-control">
+                </p>
+                <p>
+                    Link: 
+                    <input type="text" name="link" id=""value="{{aqv.Link}}" class="form-control">
+                </p>
+                <p>
+                    Descição:
+                    <input type="text" name="descricao" id="" value="{{aqv.Descricao}}" class="form-control">
+                </p>
+                <p>
+                    <input type="submit" value="Salvar edição" class="btn btn-success">
+                    <input type="reset" value="Limpar Fomrulário" class="btn btn-danger">
+                </p>
+            </form>
+        </div>
+    </div>
+{{/if}}

@@ -1,0 +1,23 @@
+<h2>Postagens</h2>
+{{#each aqv}}
+    <!---style="background-image: url({{Imagem}});"--->
+    <section  class="card mt-4">
+
+        <div class="card-body">
+
+            <h1 class="form-control">{{Titulo}}</h1>
+           
+            <p class="form-control">Categoria: {{Categoria}}</p>
+            <p class="form-control">Link: <a href="{{Link}}" target="_blank">Acesse Aqui!</a></p>
+            <p class="form-control">Postado por: {{Dono}}</p>
+            <p class="form-control">Descrição: {{Descricao}}</p>
+
+        </div>
+
+    </section>
+
+{{else}}
+
+    <p>Não há postagens no momento!</p>
+    
+{{/each}}
