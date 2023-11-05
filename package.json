@@ -14,8 +14,12 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Brunno Fardi de Souza",
   "license": "ISC",
   "devDependencies": {},
-  "description": ""
+  "description": "Meu projeto",
+  "repository": {
+    "type": "git",
+    "url": "Nehum"
+  }
 }

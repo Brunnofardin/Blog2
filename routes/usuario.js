@@ -1,43 +1,24 @@
-const express = require("express")
-const router = express.Router()
-var userLogado=""
+const express = require("express");
+const router = express.Router();
+const emailAdmin = "brunnofardin@gmail.com";
+var userLogado="";
+var useNameLogado =""
 
 // Banco de Dados
 
-const mongoose = require("mongoose")
-require("../modules/Bdpostagens")
-require("../modules/Bdusuario")
-const modelPostagens = mongoose.model("Postagens")
-const modelRegistro = mongoose.model("Registro")
+const mongoose = require("mongoose");
+require("../modules/Bdpostagens");
+require("../modules/Bdusuario");
+
+// Modelos de dados
+
+const modelPostagens = mongoose.model("Postagens");
+const modelRegistro = mongoose.model("Registro");
 
 // Body parser
 const bodyParser = require("body-parser")
 
-router.get("/fazerpostagem",(req,res)=>{
-    if(userLogado.length > 0){
-        console.log("encamiha")
-        res.render("usuario/fazerPost")
-    }else{
-        console.log("Entre primeiro")
-        res.render("usuario/login")
-    }
-})
-router.post("/fazerpostagem/nova",(req,res)=>{
-    new modelPostagens({
-        Titulo:req.body.titulo,
-        Categoria:req.body.categoria,
-        Descricao:req.body.descricao,
-        Imagem:req.body.imagem,
-        Link:req.body.link,
-        Dono:userLogado,
-    }).save().then(()=>{
-        console.log("Nova postagem registrada")
-        res.redirect("/usuario/postagens")
-    }).catch((err)=>{
-        console.log("Erro ao tentar registrar postagem,erro: "+err)
-        res.redirect("/usuario/fazerpostagem")
-    })
-})
+
 router.get("/registro",(req,res)=>{
     if(userLogado.length > 0){
         res.render("usuario/home",{erro3:true})
@@ -46,7 +27,8 @@ router.get("/registro",(req,res)=>{
         res.render("usuario/registro")
 
     }
-})
+});
+
 router.post("/registro/registrando",(req,res)=>{
     modelRegistro.findOne({Email:req.body.email}).lean().then((aqv)=>{
         if(aqv){
@@ -55,6 +37,8 @@ router.post("/registro/registrando",(req,res)=>{
             new modelRegistro({
                 Email:req.body.email,
                 Senha:req.body.senha,
+                Telefone:req.body.telefone,
+                Nome:req.body.nome,
                 Admin:0,
             }).save().then(()=>{
                 console.log("Novo usuário registrado")
@@ -67,7 +51,8 @@ router.post("/registro/registrando",(req,res)=>{
         }
 
     })
-})
+});
+
 router.get("/login",(req,res)=>{
     if(userLogado.length > 0){
         res.render("usuario/home",{erro3:true})
@@ -75,7 +60,8 @@ router.get("/login",(req,res)=>{
     }else{
         res.render("usuario/login")
     }
-})
+});
+
 router.post("/login/logado",(req,res)=>{
 
     // Processo de validação
@@ -92,6 +78,7 @@ router.post("/login/logado",(req,res)=>{
                     console.log("Logado com sucesso!")
                     res.render("usuario/home",{msg:true})
                     userLogado = req.body.email
+                    useNameLogado = aqv.Nome
                 }else{
                     // Senha incorreta
                     console.log("Senha incorreta")
@@ -107,21 +94,46 @@ router.post("/login/logado",(req,res)=>{
 
     }
 
-})
+});
+
 router.get("/postagens",(req,res)=>{
     modelPostagens.find().lean().then((aqv)=>{
         res.render("usuario/postagens",{aqv:aqv})
     })
-})
-router.get("/disconnect",(req,res)=>{
-    userLogado = ""
-    res.redirect("/")
-})
+});
+
+router.get("/fazerpostagem",(req,res)=>{
+    if(userLogado.length > 0){
+        console.log("encamihando usuário")
+        res.render("usuario/fazerPost")
+    }else{
+        console.log("Faça Login para fazer postagens")
+        res.render("usuario/login",{msg1:true})
+    }
+});
+
+router.post("/fazerpostagem/nova",(req,res)=>{
+    new modelPostagens({
+        Titulo:req.body.titulo,
+        Categoria:req.body.categoria,
+        Descricao:req.body.descricao,
+        Imagem:req.body.imagem,
+        Link:req.body.link,
+        Dono:useNameLogado,
+    }).save().then(()=>{
+        console.log("Nova postagem registrada")
+        res.redirect("/usuario/postagens")
+    }).catch((err)=>{
+        console.log("Erro ao tentar registrar postagem,erro: "+err)
+        res.redirect("/usuario/fazerpostagem")
+    })
+});
+
 router.get("/userposts",(req,res)=>{
         if(userLogado.length == 0){
-            res.redirect("/usuario/login")
+            res.render("usuario/login",{msg2:true})
         }else{
-            modelPostagens.find({Dono:userLogado}).lean().then((aqv)=>{
+            modelPostagens.find({Dono:useNameLogado}).lean().then((aqv)=>{
                 console.log(userLogado)
                 if(aqv){
                     res.render("usuario/meusposts",{aqv:aqv})
@@ -135,7 +147,8 @@ router.get("/userposts",(req,res)=>{
         }
 
 
-})
+});
+
 router.get("/editarpost/:id",(req,res)=>{
 
     modelPostagens.findOne({_id:req.params.id}).lean().then((aqv)=>{
@@ -143,7 +156,8 @@ router.get("/editarpost/:id",(req,res)=>{
         res.render("usuario/editarpost",{aqv:aqv})
 
     })
-})
+});
+
 router.post("/editarpost/salvando",(req,res)=>{
     modelPostagens.findOne({_id:req.body.id}).then((arquivo)=>{
         arquivo.Titulo = req.body.titulo,
@@ -162,7 +176,8 @@ router.post("/editarpost/salvando",(req,res)=>{
         console.log("Postagem não encontrada")
         res.render("/usuario/postagens",{msg0:true})
     })
-})
+});
+
 router.get("/deletarpost/:id",(req,res)=>{
     modelPostagens.deleteOne({_id:req.params.id}).then(()=>{
 
@@ -170,7 +185,21 @@ router.get("/deletarpost/:id",(req,res)=>{
 
         res.redirect("/usuario/userposts")
     })
-})
+});
+
+router.get("/disconnect",(req,res)=>{
+    console.log("O usuário "+userLogado+"desconectou-se")
+    userLogado = ""
+    useNameLogado=""
+    res.redirect("/")
+});
+
+function isAdmin(){
+    if(userLogado.toLocaleLowerCase() == emailAdmin.toLocaleLowerCase()){
+        return true
+    }
+
+};
 
 
-module.exports={router,userLogado}
+module.exports={router,userLogado,isAdmin}

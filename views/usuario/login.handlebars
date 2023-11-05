@@ -11,9 +11,23 @@
 {{#if erro2}}
 
      <div class="alert alert-danger">
-        Você já está logado!
+        Você já está logado,portanto não precisa fazer login ou registro
     </div>
 
+{{/if}}
+
+{{#if msg1}}
+
+    <div class="alert alert-danger">
+        Faça login para começar a fazer postagens
+    </div>
+
+{{/if}}
+
+{{#if msg2}}
+    <div class="alert alert-danger">
+        Faça login para acessar suas postagens
+    </div>
 {{/if}}
 
 <div class="card mt-2">
@@ -33,7 +47,9 @@
             <p>
                 <input type="submit" value="Login" class="btn btn-success">
                 <input type="reset" value="Limpar formulário" class="btn btn-danger">
+                <a href="/" class="btn btn-danger">Voltar</a>
             </p>
+
 
         </form>
 

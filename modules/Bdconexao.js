@@ -1,3 +1,5 @@
-const linkBd = "mongodb+srv://BrunnoFardindeSouza:15054819@registros.bbrodrc.mongodb.net/?retryWrites=true&w=majority"
+const password = 15054819
+const linkBd = `mongodb+srv://BrunnoFardindeSouza:${password}@registros.bbrodrc.mongodb.net/?retryWrites=true&w=majority`
+
 
 module.exports = {linkBd}

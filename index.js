@@ -18,13 +18,16 @@ const exphb = require("express-handlebars")
         const modelPostagens = mongoose.model("Postagens")
 
         mongoose.connect(conexaoBd.linkBd).then(()=>{
-            console.log("Conexão com Mongo Db efetuada com sucesso!")
+            console.log("Conexão com Mongo DB efetuada com sucesso!")
         }).catch((err)=>{
-            console.log("Erro ao tnetar conectar-se ao Mongo Db,erro: "+err)
+            console.log("Erro ao tnetar conectar-se ao Mongo DB,erro: "+err)
         })
     // Novas rotas (router)
         const rotasUsuario = require("./routes/usuario.js")
+        const rotasAdmin = require("./routes/admin.js")
         app.use("/usuario",rotasUsuario.router)
+        app.use("/admin",rotasAdmin)
+
     // Usuario logado
 
        
@@ -32,10 +35,10 @@ const exphb = require("express-handlebars")
 // Rotas
 
 app.get("/",(req,res)=>{
- 
     res.render("usuario/home")
  
 })
 
+// SERVIDOR 
 
 app.listen(9090 || process.env.PORT,()=>{console.log("Servidor Iniciado com Sucesso")})
